@@ -109,8 +109,7 @@ def calculoValortotalNec(geracaoMensalNec):
 
 #6)
 
-#calculos do inversor (quadro 1)
-#definir inversor no input
+#calculos do inversor
 
 def menor(x,y,z):
     max = x
@@ -134,4 +133,24 @@ def InversoresNec(potTotalNec, voltagemNec, amperagemNec, potInv, voltagemInv, a
     nmenor = menor(critW, critV, critA)
     return(nmenor)
 
-    
+
+def CalculoProdEletrica(potTotal):
+    potEletrica = potTotal * 8
+    prodEletrica = potEletrica / 1000
+    return round(prodEletrica, 2)
+
+def CalculoProdEletricaNec(potTotalNec):
+    potEletrica = potTotalNec * 8
+    prodEletrica = potEletrica / 1000
+    return round(prodEletrica, 2)
+
+
+def CalculoPayback(valorTotal, prodEletrica):
+    producao = prodEletrica * 12 * 0.70
+    payback = valorTotal / producao
+    return round(payback, 1)
+
+def CalculoPaybackNec(valorTotalNec, prodEletrica):
+    producao = prodEletrica * 12 * 0.70
+    payback = valorTotalNec / producao
+    return round(payback, 1)
