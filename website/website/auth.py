@@ -92,7 +92,11 @@ def send_data():
 def send_data2():
    global quadro
    quadro = request.form.get('quadro')
-   return render_template('base.html', quadro=quadro)
+   return render_template('base.html', quadro=quadro, areaTelhado=areaTelhado, areaPlaca=areaPlaca, alturaPlaca=CANADIANSOLAR.alturaPlaca, 
+    larguraPlaca=CANADIANSOLAR.larguraPlaca, qtdPlacas=qtdPlacas, potTotal=multiplicacaoQtdPlacaPotPlaca(qtdPlacas, CANADIANSOLAR.potenciaPainel), 
+    voltagem=voltagem, amperagem=amperagem, potZerarLuz=potZerarLuz, geracaoMensal=calculoGeracaoMensal(potTotal, qtddias), valortotal=valortotal, 
+    voltagemNec=voltagemNec, amperagemNec=amperagemNec, potTotalNec=potTotalNec, qtdPlacasNec=qtdPlacasNec, geracaoMensalNec=calculoGeracaoMensalNec(potTotalNec, qtddias), 
+    valortotalNec = calculoValortotalNec(geracaoMensalNec))
 
 
 
@@ -122,6 +126,10 @@ def send_data3():
     global valortotalNec
     global potInv
     global quadro
+    global prodEletrica
+    global payback
+    global producao
+    global potencia
     
     potTotal = multiplicacaoQtdPlacaPotPlaca(qtdPlacas, CANADIANSOLAR.potenciaPainel)
     potInv = float(request.form['potInv'])
@@ -133,9 +141,33 @@ def send_data3():
     critA = amperagem / amperagemInv
     Inversores(potTotal, voltagem, amperagem, potInv, voltagemInv, amperagemInv)
     InversoresNec(potTotalNec, voltagemNec, amperagemNec, potInv, voltagemInv, amperagemInv)
+    CalculoProdEletrica(potTotal)
+    CalculoProdEletrica(potTotalNec)
+
     if quadro == '1':
        nmenor = Inversores(potTotal, voltagem, amperagem, potInv, voltagemInv, amperagemInv)
+       prodEletrica = CalculoProdEletrica(potTotal)
+       producao = prodEletrica * 12 * 0.70
+       payback = valortotal / producao
     elif quadro == '2':
        nmenor = InversoresNec(potTotalNec, voltagemNec, amperagemNec, potInv, voltagemInv, amperagemInv)
-    return render_template('base.html', nmenor=round(nmenor))
+       prodEletrica = CalculoProdEletrica(potTotalNec)
+       producao = prodEletrica * 12 * 0.70
+       payback = valortotalNec / producao
+       
+
+    if prodEletrica <= 30:
+         taxa = '20,40'
+    elif prodEletrica > 30 and prodEletrica <= 50:
+         taxa = '34,00'
+    elif prodEletrica > 50:
+         taxa = '68,00'
+
+    
+
+    return render_template('base.html', nmenor=round(nmenor), prodEletrica=prodEletrica, taxa=taxa, payback=round(payback, 1), areaTelhado=areaTelhado, areaPlaca=areaPlaca, alturaPlaca=CANADIANSOLAR.alturaPlaca, 
+    larguraPlaca=CANADIANSOLAR.larguraPlaca, qtdPlacas=qtdPlacas, potTotal=multiplicacaoQtdPlacaPotPlaca(qtdPlacas, CANADIANSOLAR.potenciaPainel), 
+    voltagem=voltagem, amperagem=amperagem, potZerarLuz=potZerarLuz, geracaoMensal=calculoGeracaoMensal(potTotal, qtddias), valortotal=valortotal, 
+    voltagemNec=voltagemNec, amperagemNec=amperagemNec, potTotalNec=potTotalNec, qtdPlacasNec=qtdPlacasNec, geracaoMensalNec=calculoGeracaoMensalNec(potTotalNec, qtddias), 
+    valortotalNec = calculoValortotalNec(geracaoMensalNec))
 
