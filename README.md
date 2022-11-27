@@ -2,6 +2,9 @@
  Projeto acadêmico de simulação de capacidade de geração de energia solar.
  
  
+ Caminho de acesso: website/main.py
+ 
+ 
  Funcionalidades:
  
 ☑ Aprimoramento da estética do website (+ paleta de cores, página Sobre)
