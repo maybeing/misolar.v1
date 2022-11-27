@@ -1,5 +1,6 @@
 # misolar
- Simulador de capacidade de geração de energia solar
+ Projeto acadêmico de simulação de capacidade de geração de energia solar.
+ 
  
  Funcionalidades:
  
