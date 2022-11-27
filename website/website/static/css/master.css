@@ -1,0 +1,121 @@
+#entrada-dados {
+  padding: 20px 0;
+}
+
+btn {
+  color: white !important;
+  background-color: solid orange;
+  font-weight: bold !important;
+}
+
+
+
+.typewriter{
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  white-space: nowrap; /* Keeps the content on a single line */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation:
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+
+
+.btn{
+  color: #fff !important;
+    background-color: orange !important;
+    border-color: orange !important;
+    font-weight: 600 !important;
+}
+
+.btn:hover{
+  background-color: rgb(246, 86, 0) !important;
+  border-color: rgb(246, 86, 0) !important;
+}
+
+a {
+  color: black !important;
+}
+
+a:hover {
+  color: white !important;
+}
+
+.navbar {
+  padding: 0 !important;
+}
+
+
+.l{
+      border-top: 1px solid orange !important;
+}
+
+.fonte {
+color: orange !important;
+}
+
+.fonte:hover {
+  color: orange !important;
+}
+
+
+.border:hover{
+  border: 1px solid orange !important;    
+  cursor:pointer !important;
+  }
+
+input[type=radio]:checked + .l_quadro{
+    border: 1px solid orange !important;    
+  }
+
+  .quadros {
+    flex-wrap: unset !important;
+    display: block !important;
+  }
+
+
+  input[type='radio']:after {
+    width: 20px;
+    height: 20px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #d1d3d1;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+input[type='radio']:checked:after {
+    width: 20px;
+    height: 20px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #ffa500;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+label {
+  display: block !important;
+  margin-top: 15px;
+}
+
+
+.row {
+  margin: 0 !important;
+}
