@@ -49,15 +49,12 @@ def calculoGeracaoMensal(potTotal, qtddias):
     geracaoMensal = potTotal * 8 * qtddias * 0.70
     return round(geracaoMensal, 2)
 
-#concentar calculo de valor total
 def calculoValortotal(geracaoMensal):
     geracaoMensalKW = geracaoMensal / 1000
     valortotal = geracaoMensalKW * 0.70
     return round(valortotal, 2)
 
-#aqui eu percebi que todos os cálculos que eu tinha feito
-#até aqui eram pra o número de plcas POSSIVEIS, e nao NECESSÁRIAS
-#entao refiz todas com essa versao
+#Cálculos com "Nec" se referem aos cálculos do 2º quadro, de acordo com o número de placas NECessárias
 
 def divisaoAtApNec(consumomensal, geracaoMensal):
     geracaoMensalKW = geracaoMensal / 1000
@@ -101,15 +98,8 @@ def calculoValortotalNec(geracaoMensalNec):
 #depois disso, modifiquei a função de valor total do primeiro
 #quadro também, que estava de acordo com a proposta original.
 
-
-#
-#
-#
-#
-
 #6)
-
-#calculos do inversor
+#Cálculos do inversor
 
 def menor(x,y,z):
     max = x
@@ -133,7 +123,6 @@ def InversoresNec(potTotalNec, voltagemNec, amperagemNec, potInv, voltagemInv, a
     nmenor = menor(critW, critV, critA)
     return(nmenor)
 
-
 def CalculoProdEletrica(potTotal):
     potEletrica = potTotal * 8
     prodEletrica = potEletrica / 1000
@@ -143,7 +132,6 @@ def CalculoProdEletricaNec(potTotalNec):
     potEletrica = potTotalNec * 8
     prodEletrica = potEletrica / 1000
     return round(prodEletrica, 2)
-
 
 def CalculoPayback(valorTotal, prodEletrica):
     producao = prodEletrica * 12 * 0.70
