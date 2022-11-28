@@ -1,6 +1,7 @@
 from flask import Blueprint, request, render_template
 from functions import *
 from placas import *
+from flask import redirect, url_for
 
 auth = Blueprint('auth', __name__)
 
