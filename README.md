@@ -13,6 +13,10 @@
 
 ☑ Organização da navegação/rotas do webite num mesmo arquivo
 
+☑ Fazer o design e implementação da logo do website
+
+☑ Mostrar todos os itens desta lista na categoria "em breve" na página Sobre
+
 ☐ Banco de dados para escolher a placa utilizada durante os cálculos
 
 ☐ Link de ancoragem com o botão "calcular"
@@ -28,9 +32,5 @@
 ☐ Botão de "calcular novamente"
 
 ☐ Otimizar a navegação
-
-☐ Fazer o design e implementação da logo do website
-
-☐ Mostrar todos os itens acima na categoria "em breve" na página Sobre
 
 ☐ implementação da API do Google Earth
