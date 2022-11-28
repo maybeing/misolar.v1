@@ -17,9 +17,9 @@
 
 ☑ Mostrar todos os itens desta lista na categoria "em breve" na página Sobre
 
-☐ Banco de dados para escolher a placa utilizada durante os cálculos
+☑ Link de ancoragem com o botão "calcular"
 
-☐ Link de ancoragem com o botão "calcular"
+☐ Banco de dados para escolher a placa utilizada durante os cálculos
 
 ☐ Telas e avisos de erro
 
@@ -27,10 +27,6 @@
 
 ☐ Placeholders no formulário com as unidades de medida
 
-☐ Seção “calculando” só aparece quando não o cálculo ainda não tiver sido feito
-
 ☐ Botão de "calcular novamente"
 
-☐ Otimizar a navegação
 
-☐ implementação da API do Google Earth
