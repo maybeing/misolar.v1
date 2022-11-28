@@ -16,24 +16,20 @@ btn {
   font-weight: bold !important;
 }
 
-
-
 .typewriter{
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  white-space: nowrap; /* Keeps the content on a single line */
-  letter-spacing: .15em; /* Adjust as needed */
+  overflow: hidden;
+  white-space: nowrap; 
+  letter-spacing: .15em; 
   animation:
     typing 3.5s steps(40, end),
     blink-caret .75s step-end infinite;
 }
 
-/* The typing effect */
+
 @keyframes typing {
   from { width: 0 }
   to { width: 100% }
 }
-
-
 
 .btn{
   color: #fff !important;
@@ -71,7 +67,6 @@ color: orange !important;
 .fonte:hover {
   color: orange !important;
 }
-
 
 .border:hover{
   border: 1px solid orange !important;    
