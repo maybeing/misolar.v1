@@ -26,7 +26,6 @@ valortotalNec = None
 potInv = None
 
 
-
 @auth.route('send_data', methods=['POST'])
 def send_data():
     global alturatelhado
@@ -34,7 +33,7 @@ def send_data():
     global consumomensal
     global valortotal
     global qtddias
-    global potTotal #teste1
+    global potTotal
     global areaTelhado
     global areaPlaca
     global qtdPlacas
@@ -70,6 +69,7 @@ def send_data():
     geracaoMensal = calculoGeracaoMensal(potTotal, qtddias)
     valortotal = calculoValortotal(geracaoMensal)
     
+    #cálculos do 2º quadro
     qtdPlacasNec = divisaoAtApNec(consumomensal, geracaoMensal)
     voltagemNec = multiplicacaoQtdPlacaVoltagemNec(qtdPlacasNec, CANADIANSOLAR.voltagemPainel)
     amperagemNec = multiplicacaoQtdPlacaAmperagemNec(qtdPlacasNec, CANADIANSOLAR.correntePainel)
@@ -88,7 +88,6 @@ def send_data():
     valortotalNec = calculoValortotalNec(geracaoMensalNec))
 
 
-
 @auth.route('send_data2', methods=['post'])
 def send_data2():
    global quadro
@@ -103,13 +102,12 @@ def send_data2():
 
 @auth.route('send_data3', methods=['POST'])
 def send_data3():    
-    
     global alturatelhado
     global comprimentotelhado
     global consumomensal
     global valortotal
     global qtddias
-    global potTotal #teste1
+    global potTotal
     global areaTelhado
     global areaPlaca
     global qtdPlacas
@@ -155,7 +153,6 @@ def send_data3():
        prodEletrica = CalculoProdEletrica(potTotalNec)
        producao = prodEletrica * 12 * 0.70
        payback = valortotalNec / producao
-       
 
     if prodEletrica <= 30:
          taxa = '20,40'
@@ -163,8 +160,6 @@ def send_data3():
          taxa = '34,00'
     elif prodEletrica > 50:
          taxa = '68,00'
-
-    
 
     return render_template('base.html', nmenor=round(nmenor), prodEletrica=prodEletrica, taxa=taxa, payback=round(payback, 1), areaTelhado=areaTelhado, areaPlaca=areaPlaca, alturaPlaca=CANADIANSOLAR.alturaPlaca, 
     larguraPlaca=CANADIANSOLAR.larguraPlaca, qtdPlacas=qtdPlacas, potTotal=multiplicacaoQtdPlacaPotPlaca(qtdPlacas, CANADIANSOLAR.potenciaPainel), 
