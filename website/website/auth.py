@@ -24,8 +24,38 @@ potTotalNec = None
 geracaoMensalNec = None
 valortotalNec = None
 potInv = None
+estadoTela1 = None
+estadoTela2 = None
+estadoTela3 = None
+estadoTela4 = None
 
 
+def ControlarEstadosPagina(nmrPagina):
+     global estadoTela1 
+     global estadoTela2 
+     global estadoTela3 
+     global estadoTela4 
+     if nmrPagina == 1:
+          estadoTela1 = 'inline'
+          estadoTela2 = 'none'
+          estadoTela3 = 'none'
+          estadoTela4 = 'none'
+     elif nmrPagina == 2:
+               estadoTela1 = 'none'
+               estadoTela2 = 'inline'
+               estadoTela3 = 'none'
+               estadoTela4 = 'none'
+     elif nmrPagina == 3:
+               estadoTela1 = 'none'
+               estadoTela2 = 'none'
+               estadoTela3 = 'inline'
+               estadoTela4 = 'none' 
+     elif nmrPagina == 4:
+               estadoTela1 = 'none'
+               estadoTela2 = 'none'
+               estadoTela3 = 'none'
+               estadoTela4 = 'inline'          
+               
 @auth.route('send_data', methods=['POST'])
 def send_data():
     global alturatelhado
@@ -49,6 +79,10 @@ def send_data():
     global potTotalNec
     global geracaoMensalNec
     global valortotalNec
+
+
+    ControlarEstadosPagina(2)
+
 
     #2)Agora deve-se solicitar ao usuário os dados de sua instalação para que o sistema possa sugerir algumas possibilidades ao usuário
     #INPUTS
@@ -85,18 +119,20 @@ def send_data():
     larguraPlaca=CANADIANSOLAR.larguraPlaca, qtdPlacas=qtdPlacas, potTotal=multiplicacaoQtdPlacaPotPlaca(qtdPlacas, CANADIANSOLAR.potenciaPainel), 
     voltagem=voltagem, amperagem=amperagem, potZerarLuz=potZerarLuz, geracaoMensal=calculoGeracaoMensal(potTotal, qtddias), valortotal=valortotal, 
     voltagemNec=voltagemNec, amperagemNec=amperagemNec, potTotalNec=potTotalNec, qtdPlacasNec=qtdPlacasNec, geracaoMensalNec=calculoGeracaoMensalNec(potTotalNec, qtddias), 
-    valortotalNec = calculoValortotalNec(geracaoMensalNec))
+    valortotalNec = calculoValortotalNec(geracaoMensalNec),estadoTela1 = estadoTela1,estadoTela2 = estadoTela2,estadoTela3 = estadoTela3,estadoTela4 = estadoTela4)
 
 
 @auth.route('send_data2', methods=['post'])
 def send_data2():
    global quadro
    quadro = request.form.get('quadro')
+   ControlarEstadosPagina(3)
+   
    return render_template('base.html', quadro=quadro, areaTelhado=areaTelhado, areaPlaca=areaPlaca, alturaPlaca=CANADIANSOLAR.alturaPlaca, 
     larguraPlaca=CANADIANSOLAR.larguraPlaca, qtdPlacas=qtdPlacas, potTotal=multiplicacaoQtdPlacaPotPlaca(qtdPlacas, CANADIANSOLAR.potenciaPainel), 
     voltagem=voltagem, amperagem=amperagem, potZerarLuz=potZerarLuz, geracaoMensal=calculoGeracaoMensal(potTotal, qtddias), valortotal=valortotal, 
     voltagemNec=voltagemNec, amperagemNec=amperagemNec, potTotalNec=potTotalNec, qtdPlacasNec=qtdPlacasNec, geracaoMensalNec=calculoGeracaoMensalNec(potTotalNec, qtddias), 
-    valortotalNec = calculoValortotalNec(geracaoMensalNec))
+    valortotalNec = calculoValortotalNec(geracaoMensalNec),estadoTela1 = estadoTela1,estadoTela2 = estadoTela2,estadoTela3 = estadoTela3,estadoTela4 = estadoTela4)
 
 
 
@@ -130,6 +166,7 @@ def send_data3():
     global producao
     global potencia
 
+
     potTotal = multiplicacaoQtdPlacaPotPlaca(qtdPlacas, CANADIANSOLAR.potenciaPainel)
     potInv = float(request.form['potInv'])
     voltagemInv = float(request.form['voltagemInv'])
@@ -159,10 +196,11 @@ def send_data3():
          taxa = '68,00'
     
     payback = valortotalLoc / producao
+    ControlarEstadosPagina(4)
 
     return render_template('base.html', nmenor=round(nmenor), prodEletrica=prodEletrica, taxa=taxa, payback=round(payback, 1), areaTelhado=areaTelhado, areaPlaca=areaPlaca, alturaPlaca=CANADIANSOLAR.alturaPlaca, 
     larguraPlaca=CANADIANSOLAR.larguraPlaca, qtdPlacas=qtdPlacas, potTotal=multiplicacaoQtdPlacaPotPlaca(qtdPlacas, CANADIANSOLAR.potenciaPainel), 
     voltagem=voltagem, amperagem=amperagem, potZerarLuz=potZerarLuz, geracaoMensal=calculoGeracaoMensal(potTotal, qtddias), valortotal=valortotal, 
     voltagemNec=voltagemNec, amperagemNec=amperagemNec, potTotalNec=potTotalNec, qtdPlacasNec=qtdPlacasNec, geracaoMensalNec=calculoGeracaoMensalNec(potTotalNec, qtddias), 
-    valortotalNec = calculoValortotalNec(geracaoMensalNec))
+    valortotalNec = calculoValortotalNec(geracaoMensalNec),estadoTela1 = estadoTela1,estadoTela2 = estadoTela2,estadoTela3 = estadoTela3,estadoTela4 = estadoTela4)
 
