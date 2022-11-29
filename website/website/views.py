@@ -3,7 +3,7 @@ views = Blueprint('views', __name__)
 
 @views.route('/')
 def home():
-    return render_template("home.html")
+    return render_template("home.html", estadoTela1 = "inline",estadoTela2 ="none",estadoTela3 ="none",estadoTela4 ="none")
 
 @views.route('sobre.html')
 def sobre():

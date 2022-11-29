@@ -1,253 +1,370 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, inital-scale-1"/>
-    <link rel="stylesheet" href="../static/css/master.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, inital-scale-1" />
+    <link rel="stylesheet" href="../static/css/master.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    />
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="icon" type="image/svg" href="../static/images/logotipo2.svg">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="icon" type="image/svg" href="../static/images/logotipo2.svg" />
     <title>Simulador de capacidade de geração de energia solar</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-sm fixed-top">
-
-  <!-- logo do IFF -->
-  <!--
+      <!-- logo do IFF -->
+      <!--
   <a target="_blank" class="navbar-brand" href="https://portal1.iff.edu.br/nossos-campi/bom-jesus-do-itabapoana">
     <img width="25%" src="website\static\images\ifflogo.png" alt="">
   </a>
 -->
-  <!-- items da barra de navegação -->
-  <div class="p-3 collapse navbar-collapse flex-row-reverse bg-warning" id="collapsibleNavbar" >
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link active" href="/"><b>início</b></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="sobre.html">sobre</a>
-    </li>
-  </ul>
-</nav>
-
-<br><br><br><br>
-
-<div class="container p-5 text-center"><h1>Simulador de capacidade de geração de energia solar</h1><hr/ class="l"></div>
-
-<!--Agora deve-se solicitar ao usuário os dados de sua instalação para que o sistema possa sugerir algumas possibilidades ao usuário-->
-<div class="container p-3 text-center">
-
-
-
-
-
-
-
-    <h4>Dados da instalação</h4>
-    <br>
-
-
-    <form action="{{ url_for('auth.send_data') + '#secao2' }}" id="entrada-dados" action="index.html" method="post">
-
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="">Altura do telhado disponível (em metros):</label>
-          <input type="text" class="form-control" name="altura-telhado" value="">
-        </div>
+      <!-- items da barra de navegação -->
+      <div
+        class="p-3 collapse navbar-collapse flex-row-reverse bg-warning"
+        id="collapsibleNavbar"
+      >
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="/"><b>início</b></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sobre.html">sobre</a>
+          </li>
+        </ul>
       </div>
+    </nav>
 
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="">Comprimento do telhado disponível (em  metros):</label>
-          <input type="text" class="form-control" name="comprimento-telhado" value="">
-        </div>
-      </div>
+    <br /><br /><br /><br />
+
+    <div class="container p-5 text-center">
+      <h1>Simulador de capacidade de geração de energia solar</h1>
+      <hr/ class="l">
     </div>
 
-    <br><br>
+    <!--Agora deve-se solicitar ao usuário os dados de sua instalação para que o sistema possa sugerir algumas possibilidades ao usuário-->
+    <div class="container p-3 text-center" style="display:{{ estadoTela1 }}">
+      <h4>Dados da instalação</h4>
+      <br />
 
-    <div class="row">
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="">Consumo mensal de KW/H na conta de luz:</label>
-          <input type="text" class="form-control" name="consumo-mensal" value="">
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="">Valor total da conta de luz:</label>
-          <input type="text" class="form-control" name="valor-total" value="">
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="">Período de leitura na conta de luz (em dias):</label>
-          <input type="text" class="form-control" name="qtd-dias" value="">
-        </div>
-      </div>
-    </div>
-
-    <!--<br><br><hr/><br><br>-->
-    <br>
-     <a href="auth.send_data#secao2"><input type="submit" class="btn btn-lg" name="" value="Calcular"></a>
-    </div>
-
-  </form>
-
-    <br><br><br><br><br>
-  <div class="jumbotron text-center resultado" action="{{ url_for('auth.send_data') }}">
-    <div class="container" name="calculando" id="secao2">
-
-    <h2>Quase lá! Agora escolha o quadro ideal para seu inversor:</h2>
-
-      <div class="container">
-        <form action="{{ url_for('auth.send_data2') + '#secao3'  }}" id="entrada-dados" action="{{ url_for('auth.send_data2') }}" method="post">
-          <div class="row r_quadros">
-
-               <div class="col-md">
-                <br>
-                <input type="radio" name="quadro" id="1" value="1">
-                <label for="1" class="l_quadro">
-                <div class="p-2 border bg-light quadros">
-                 <h2 class="p-2">Quadro 1</h2>
-                 <p class="text-left" style="margin-left: 20px;">Área de cada placa: {{ areaPlaca }}m²</p>
-                 <p class="text-left" style="margin-left: 20px;">Área total do telhado: {{ areaTelhado }}m²</p>
-                 <p class="text-left" style="margin-left: 20px;">Quantidade de placas que <span style="font-weight:bold;">podem</span> ser instaladas: {{ qtdPlacas }} placas</p>
-                 <p class="text-left" style="margin-left: 20px;">Potência total em Watts: {{ potTotal }}W</p>
-                 <p class="text-left" style="margin-left: 20px;">Potência total em Volts: {{ voltagem }}V</p>
-                 <p class="text-left" style="margin-left: 20px;">Potência total em Amperes: {{ amperagem }}A</p>
-                 <p class="text-left" style="margin-left: 20px;">Geração mensal: {{ geracaoMensal }}W</p>
-                 <p class="text-left" style="margin-left: 20px;">Valor total de produção: R${{ valortotal }} (energia)</p>
-                </div>
-              </label>
-               </div>
-
-            <div class="col-md">
-             <br>
-             <input type="radio" name="quadro" id="2" value="2">
-             <label for="2" class="l_quadro">
-             <div class="p-2 border bg-light quadros">
-              <h2 class="p-2">Quadro 2</h2>
-              <p class="text-left" style="margin-left: 20px;">Área de cada placa: {{ areaPlaca }}m²</p>
-              <p class="text-left" style="margin-left: 20px;">Área total do telhado: {{ areaTelhado }}m²</p>
-              <p class="text-left" style="margin-left: 20px;">Quantidade de placas que <span style="font-weight:bold;">são necessárias</span> ser instaladas: {{ qtdPlacasNec }} placas</p>
-              <p class="text-left" style="margin-left: 20px;">Potência total em Watts: {{ potTotalNec }}W</p>
-              <p class="text-left" style="margin-left: 20px;">Potência total em Volts: {{ voltagemNec }}V</p>
-              <p class="text-left" style="margin-left: 20px;">Potência total em Amperes: {{ amperagemNec }}A</p>
-              <p class="text-left" style="margin-left: 20px;">Geração mensal: {{ geracaoMensalNec }}</p>
-              <p class="text-left" style="margin-left: 20px;">Valor total de produção: R${{valortotalNec}} (energia)</p>
-             </div>
-           </label>
-            </div>
-
-          </div>
-
-
-              <br><br><br>
-              <a href="auth.send_data2"><input type="submit" class="btn btn-lg" name="" value="Escolher">
-              </a>
-
-            </form>
-      </div>
-    </div>
-
-
-
-    <p class="text-center">
-      O quadro escolhido foi o QUADRO {{ quadro }}.</p>
-  </p>
-  </div>
-<br><hr><br>
-
-<div class="container p-3 text-center" id="secao3">
-        <form action="{{ url_for('auth.send_data3')  + '#secao4' }}" id="entrada-dados" action="{{ url_for('auth.send_data3') }}" method="post">
-          
-
-        <h4>Dados do inversor</h4>
-        <br>
-        <!--Sistema deve solicitar ao usuário o modelo de inversor a ser utilizado com os seguintes dados:-->
-       <div class="row">
+      <form
+        action="{{ url_for('auth.send_data') + '#secao2' }}"
+        id="entrada-dados"
+        action="index.html"
+        method="post"
+      >
+        <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="">Capacidade máxima em kw/h de injeção na rede elétrica:</label>
-              <input type="text" class="form-control" name="altura-telhado" value="">
+              <label for="">Altura do telhado disponível (em metros):</label>
+              <input
+                type="text"
+                class="form-control"
+                name="altura-telhado"
+                value=""
+              />
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for=""
+                >Comprimento do telhado disponível (em metros):</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="comprimento-telhado"
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <br /><br />
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Consumo mensal de KW/H na conta de luz:</label>
+              <input
+                type="text"
+                class="form-control"
+                name="consumo-mensal"
+                value=""
+              />
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Valor total da conta de luz:</label>
+              <input
+                type="text"
+                class="form-control"
+                name="valor-total"
+                value=""
+              />
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for=""
+                >Período de leitura na conta de luz (em dias):</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="qtd-dias"
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <br />
+        <div class="col-md-12">
+          <a href="auth.send_data#secao2"
+            ><input type="submit" class="btn btn-lg" name="" value="Calcular"
+          /></a>
+        </div>
+      </form>
+    </div>
+
+    <div
+      class="jumbotron text-center resultado"
+      action="{{ url_for('auth.send_data') }}"
+      style="display:{{ estadoTela2 }}"
+    >
+      <div class="container" name="calculando" id="secao2" >
+        <h2>Quase lá! Agora escolha o quadro ideal para seu inversor:</h2>
+
+        <div class="container">
+          <form
+            action="{{ url_for('auth.send_data2') + '#secao3'  }}"
+            id="entrada-dados"
+            action="{{ url_for('auth.send_data2') }}"
+            method="post"
+          >
+            <div class="row r_quadros">
+              <div class="col-md">
+                <br />
+                <input type="radio" name="quadro" id="1" value="1" />
+                <label for="1" class="l_quadro">
+                  <div class="p-2 border bg-light quadros">
+                    <h2 class="p-2">Quadro 1</h2>
+                    <p class="text-left" style="margin-left: 20px">
+                      Área de cada placa: {{ areaPlaca }}m²
+                    </p>
+                    <p class="text-left" style="margin-left: 20px">
+                      Área total do telhado: {{ areaTelhado }}m²
+                    </p>
+                    <p class="text-left" style="margin-left: 20px">
+                      Quantidade de placas que
+                      <span style="font-weight: bold">podem</span> ser
+                      instaladas: {{ qtdPlacas }} placas
+                    </p>
+                    <p class="text-left" style="margin-left: 20px">
+                      Potência total em Watts: {{ potTotal }}W
+                    </p>
+                    <p class="text-left" style="margin-left: 20px">
+                      Potência total em Volts: {{ voltagem }}V
+                    </p>
+                    <p class="text-left" style="margin-left: 20px">
+                      Potência total em Amperes: {{ amperagem }}A
+                    </p>
+                    <p class="text-left" style="margin-left: 20px">
+                      Geração mensal: {{ geracaoMensal }}W
+                    </p>
+                    <p class="text-left" style="margin-left: 20px">
+                      Valor total de produção: R${{ valortotal }} (energia)
+                    </p>
+                  </div>
+                </label>
+              </div>
+
+              <div class="col-md">
+                <br />
+                <input type="radio" name="quadro" id="2" value="2" />
+                <label for="2" class="l_quadro">
+                  <div class="p-2 border bg-light quadros">
+                    <h2 class="p-2">Quadro 2</h2>
+                    <p class="text-left" style="margin-left: 20px">
+                      Área de cada placa: {{ areaPlaca }}m²
+                    </p>
+                    <p class="text-left" style="margin-left: 20px">
+                      Área total do telhado: {{ areaTelhado }}m²
+                    </p>
+                    <p class="text-left" style="margin-left: 20px">
+                      Quantidade de placas que
+                      <span style="font-weight: bold">são necessárias</span> ser
+                      instaladas: {{ qtdPlacasNec }} placas
+                    </p>
+                    <p class="text-left" style="margin-left: 20px">
+                      Potência total em Watts: {{ potTotalNec }}W
+                    </p>
+                    <p class="text-left" style="margin-left: 20px">
+                      Potência total em Volts: {{ voltagemNec }}V
+                    </p>
+                    <p class="text-left" style="margin-left: 20px">
+                      Potência total em Amperes: {{ amperagemNec }}A
+                    </p>
+                    <p class="text-left" style="margin-left: 20px">
+                      Geração mensal: {{ geracaoMensalNec }}
+                    </p>
+                    <p class="text-left" style="margin-left: 20px">
+                      Valor total de produção: R${{valortotalNec}} (energia)
+                    </p>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <br /><br /><br />
+            <a href="auth.send_data2"
+              ><input
+                type="submit"
+                class="btn btn-lg"
+                name=""
+                value="Escolher"
+              />
+            </a>
+          </form>
+        </div>
+      </div>
+
+      <p class="text-center">O quadro escolhido foi o QUADRO {{ quadro }}.</p>
+    </div>
+
+    <div class="container p-3 text-center" id="secao3" style="display:{{ estadoTela3 }}">
+      <form
+        action="{{ url_for('auth.send_data3')  + '#secao4' }}"
+        id="entrada-dados"
+        action="{{ url_for('auth.send_data3') }}"
+        method="post"
+      >
+        <h4>Dados do inversor</h4>
+        <br />
+        <!--Sistema deve solicitar ao usuário o modelo de inversor a ser utilizado com os seguintes dados:-->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for=""
+                >Capacidade máxima em kw/h de injeção na rede elétrica:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="altura-telhado"
+                value=""
+              />
             </div>
           </div>
 
           <div class="col-md-6">
             <div class="form-group">
               <label for="">Valor total do inversor:</label>
-              <input type="text" class="form-control" name="comprimento-telhado" value="">
+              <input
+                type="text"
+                class="form-control"
+                name="comprimento-telhado"
+                value=""
+              />
             </div>
           </div>
         </div>
 
-        <br><br>
+        <br /><br />
 
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Capacidade máxima em Watts:</label>
-              <input type="text" class="form-control" name="potInv" value="">
+              <input type="text" class="form-control" name="potInv" value="" />
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Capacidade máxima em Volts:</label>
-              <input type="text" class="form-control" name="voltagemInv" value="">
+              <input
+                type="text"
+                class="form-control"
+                name="voltagemInv"
+                value=""
+              />
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="form-group">
               <label for="">Capacidade máxima em Amperes:</label>
-              <input type="text" class="form-control" name="amperagemInv" value="">
+              <input
+                type="text"
+                class="form-control"
+                name="amperagemInv"
+                value=""
+              />
             </div>
           </div>
         </div>
-        <br><br>
-         <a href="auth.send_data3"><input type="submit" class="btn btn-lg" name="" value="Resultado final"></a>
+        <br /><br />
+        <a href="auth.send_data3"
+          ><input
+            type="submit"
+            class="btn btn-lg"
+            name=""
+            value="Resultado final"
+        /></a>
       </form>
-
     </div>
 
-<br><br><hr><br><br><br>
-    <div class="container p-3 text-center">
+    <br /><br />
+    <hr />
+    <br /><br /><br />
+    <div class="container p-3 text-center" style="display:{{ estadoTela4 }}">
       <div class="quadro_resultado" id="secao4">
-      <br><br>
-      <h2>Dados de geração e de rendimento calculados</h2>
-      <br><br><br>
-      <h1>{{ nmenor }} inversor(es)</h1>
-      <p class="text-center">Quantidade de inversores necessários para comportar a instalação com o modelo informado</p>
+        <br /><br />
+        <h2>Dados de geração e de rendimento calculados</h2>
+        <br /><br /><br />
+        <h1>{{ nmenor }} inversor(es)</h1>
+        <p class="text-center">
+          Quantidade de inversores necessários para comportar a instalação com o
+          modelo informado
+        </p>
 
-      <br><br>
+        <br /><br />
 
-      <h1>{{ prodEletrica }}kWh</h1>
-      <p class="text-center">Estimação da produção elétrica do sistema  mensal e valor gerado por KW/H</p>
+        <h1>{{ prodEletrica }}kWh</h1>
+        <p class="text-center">
+          Estimação da produção elétrica do sistema mensal e valor gerado por
+          KW/H
+        </p>
 
-      <br><br>
-      
-      <h1>R${{ taxa }}</h1>
-      <p class="text-center">Dedução da taxa de utilização da rede da concessionária</p>
-      
-      <br><br>
+        <br /><br />
 
-      <h1>{{ payback }} anos</h1>
-      <p class="text-center">Quantidade de anos em que o investimento será pago</p>
+        <h1>R${{ taxa }}</h1>
+        <p class="text-center">
+          Dedução da taxa de utilização da rede da concessionária
+        </p>
+
+        <br /><br />
+
+        <h1>{{ payback }} anos</h1>
+        <p class="text-center">
+          Quantidade de anos em que o investimento será pago
+        </p>
+      </div>
     </div>
-  </div>
-  </div>
-</div>
 
-
-</div>
-<br><br><br><br>
-</body>
+    <br /><br /><br /><br />
+  </body>
 </html>
