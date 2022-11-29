@@ -129,37 +129,36 @@ def send_data3():
     global payback
     global producao
     global potencia
-    
+
     potTotal = multiplicacaoQtdPlacaPotPlaca(qtdPlacas, CANADIANSOLAR.potenciaPainel)
     potInv = float(request.form['potInv'])
     voltagemInv = float(request.form['voltagemInv'])
     amperagemInv = float(request.form['amperagemInv'])
 
-    critW = potTotal / potInv
-    critV = voltagem / voltagemInv
-    critA = amperagem / amperagemInv
-    Inversores(potTotal, voltagem, amperagem, potInv, voltagemInv, amperagemInv)
-    InversoresNec(potTotalNec, voltagemNec, amperagemNec, potInv, voltagemInv, amperagemInv)
-    CalculoProdEletrica(potTotal)
-    CalculoProdEletrica(potTotalNec)
-
     if quadro == '1':
-       nmenor = Inversores(potTotal, voltagem, amperagem, potInv, voltagemInv, amperagemInv)
-       prodEletrica = CalculoProdEletrica(potTotal)
-       producao = prodEletrica * 12 * 0.70
-       payback = valortotal / producao
-    elif quadro == '2':
-       nmenor = InversoresNec(potTotalNec, voltagemNec, amperagemNec, potInv, voltagemInv, amperagemInv)
-       prodEletrica = CalculoProdEletrica(potTotalNec)
-       producao = prodEletrica * 12 * 0.70
-       payback = valortotalNec / producao
-
+     potTotalLoc = potTotal
+     voltagemLoc = voltagem
+     amperagemLoc = amperagem
+     valortotalLoc = valortotal
+    else:           
+     potTotalLoc =  potTotalNec
+     voltagemLoc = voltagemNec
+     amperagemLoc =  amperagemNec
+     valortotalLoc = valortotalNec
+   
+    
+    nmenor = Inversores(potTotalLoc, voltagemLoc, amperagemLoc, potInv, voltagemInv, amperagemInv)
+    prodEletrica = CalculoProdEletrica(potTotalLoc)
+    producao = prodEletrica * 12 * 0.70
+    
     if prodEletrica <= 30:
          taxa = '20,40'
     elif prodEletrica > 30 and prodEletrica <= 50:
          taxa = '34,00'
     elif prodEletrica > 50:
          taxa = '68,00'
+    
+    payback = valortotalLoc / producao
 
     return render_template('base.html', nmenor=round(nmenor), prodEletrica=prodEletrica, taxa=taxa, payback=round(payback, 1), areaTelhado=areaTelhado, areaPlaca=areaPlaca, alturaPlaca=CANADIANSOLAR.alturaPlaca, 
     larguraPlaca=CANADIANSOLAR.larguraPlaca, qtdPlacas=qtdPlacas, potTotal=multiplicacaoQtdPlacaPotPlaca(qtdPlacas, CANADIANSOLAR.potenciaPainel), 

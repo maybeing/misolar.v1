@@ -116,29 +116,13 @@ def Inversores(potTotal, voltagem, amperagem, potInv, voltagemInv, amperagemInv)
     nmenor = menor(critW, critV, critA)
     return(nmenor)
 
-def InversoresNec(potTotalNec, voltagemNec, amperagemNec, potInv, voltagemInv, amperagemInv):
-    critW = potTotalNec / potInv
-    critV = voltagemNec / voltagemInv
-    critA = amperagemNec / amperagemInv
-    nmenor = menor(critW, critV, critA)
-    return(nmenor)
-
 def CalculoProdEletrica(potTotal):
     potEletrica = potTotal * 8
     prodEletrica = potEletrica / 1000
     return round(prodEletrica, 2)
 
-def CalculoProdEletricaNec(potTotalNec):
-    potEletrica = potTotalNec * 8
-    prodEletrica = potEletrica / 1000
-    return round(prodEletrica, 2)
 
 def CalculoPayback(valorTotal, prodEletrica):
     producao = prodEletrica * 12 * 0.70
     payback = valorTotal / producao
-    return round(payback, 1)
-
-def CalculoPaybackNec(valorTotalNec, prodEletrica):
-    producao = prodEletrica * 12 * 0.70
-    payback = valorTotalNec / producao
     return round(payback, 1)
